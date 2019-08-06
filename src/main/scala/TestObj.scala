@@ -8,6 +8,9 @@ import scala.concurrent._
 
 /**
  * Created by shilpika on 7/24/15.
+ * A basic object that takes in a username, reponame, branchname, and a 'groupBy'
+ * What is a 'groupBy'?
+ * 
  */
 object TestObj {
   def main(args: Array[String]) {
@@ -24,12 +27,12 @@ object TestObj {
     CommitDensityService.dataForMetrics(user, repo, branch, "week")
     CommitDensityService.dataForMetrics(user, repo, branch, "month")
     log.info("DONE storing commit details and defect density result for "+repo)
-    // store db names for tracked dbs
-    //log.info("Storing tracked Db name for "+repo)
-    //CommitDensityService.storeRepoName(user+"_"+repo+"_"+branch)
+    // store db names for tracked dbs <-- what is this?
+    //log.info("Storing tracked Db name for "+repo) 
+    //CommitDensityService.storeRepoName(user+"_"+repo+"_"+branch) <-- Why commented out? Is this broken?
     val res = Future("Final Metrics results stored in DB")
-    Await.result(res,5 minutes)
-    println("done")
+    Await.result(res,5 minutes) // <-- Better to use Await.ready and unpack the ouput
+    println("done") // <-- why not println(res)
 
   }
 
